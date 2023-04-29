@@ -61,7 +61,7 @@ public class FileInput {
         String teamNameCheck;
         // open connection
         try {
-            String dbUrl = SQLFile;
+            String dbUrl = "jdbc:sqlite:" + SQLFile;
             connection = DriverManager.getConnection(dbUrl);        
         } catch (SQLException e) {
             System.err.println(e);
@@ -112,7 +112,7 @@ public class FileInput {
     public static void insertPitcher(Pitcher p, String SQLFile) { 
         // open connection
         try {
-            String dbUrl = SQLFile;
+            String dbUrl = "jdbc:sqlite:" + SQLFile;
             connection = DriverManager.getConnection(dbUrl);        
         } catch (SQLException e) {
             System.err.println(e);
