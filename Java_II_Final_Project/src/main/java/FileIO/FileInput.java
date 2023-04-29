@@ -10,32 +10,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import Classes.Pitcher;
 
 
 
 public class FileInput {
-    static String formatLengthName = "%-20.20s"; //controls length of last name and first name
-    static String formatLengthNumber = "%-5.5s"; //controls length of the rest of the data
+    //static String formatLengthName = "%-20.20s"; //controls length of last name and first name
+    //static String formatLengthNumber = "%-5.5s"; //controls length of the rest of the data
     private static Connection connection;
     
     
     public static String getPitcherStats(Pitcher p) {
-        //returns a string with break line to be += to the return string of PitcherStatistics
         
         
         //String.format(formatLength,p.getLastName() + ", " + p.getFirstName())
         String stringLine
-                = String.format(formatLengthName,p.getLastName() + ", " + p.getFirstName())
-                + String.format(formatLengthNumber,p.getIp())
-                + String.format(formatLengthNumber,p.getHits())
-                + String.format(formatLengthNumber,p.getRuns())
-                + String.format(formatLengthNumber,p.getEarnedRuns())
-                + String.format(formatLengthNumber,p.getWalks())
-                + String.format(formatLengthNumber,p.getStrikeOuts())
-                + String.format(formatLengthNumber,p.getAtBats())
-                + String.format(formatLengthNumber,p.getTotalBattersFaced())
-                + String.format(formatLengthNumber,p.getNumberOfPitches())
+                = p.getLastName() + ", " + p.getFirstName() + "*"
+                + p.getIp() + "*"
+                + p.getHits() + "*"
+                + p.getRuns() + "*"
+                + p.getEarnedRuns() + "*"
+                + p.getWalks() + "*"
+                + p.getStrikeOuts() + "*"
+                + p.getAtBats() + "*"
+                + p.getTotalBattersFaced() + "*"
+                + p.getNumberOfPitches() + "*"
                 + "\n"
                 ;
 
@@ -44,20 +44,22 @@ public class FileInput {
     
     
     //order by team----------
-    public static String PitcherStatistics(String SQLFile) {
+    public static ArrayList<String> PitcherStatistics(String SQLFile) {
         
         //String that collects all pitchers info and gets returned.\
-        String topRow = String.format(formatLengthNumber,"ip")
-                + String.format(formatLengthNumber,"h")
-                + String.format(formatLengthNumber,"r")
-                + String.format(formatLengthNumber,"ip")
-                + String.format(formatLengthNumber,"er")
-                + String.format(formatLengthNumber,"bb")
-                + String.format(formatLengthNumber,"so")
-                + String.format(formatLengthNumber,"bf")
-                + String.format(formatLengthNumber,"np")
+        String topRow = "ip*"
+                + "h*"
+                + "r*"
+                + "er*"
+                + "bb*"
+                + "so*"
+                + "ab*"
+                + "bf*"
+                + "np*"
                 +"\n";
-        String Stats = "";
+        
+        String dashes = "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n";
+        ArrayList<String> Stats = new ArrayList<>();
         String teamNameCheck;
         // open connection
         try {
@@ -65,7 +67,7 @@ public class FileInput {
             connection = DriverManager.getConnection(dbUrl);        
         } catch (SQLException e) {
             System.err.println(e);
-            return "There was an error in connecting to SQL File";
+            //return "There was an error in connecting to SQL File";
         }  
         
         // add code that prints the task with the specified completed status
@@ -76,21 +78,21 @@ public class FileInput {
             Pitcher p = new Pitcher(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDouble(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getInt(12));
             //add team name and break line to the start of the string
             teamNameCheck = p.getTeamName();
-            Stats = String.format(formatLengthName,teamNameCheck) + topRow;
-            Stats += "------------------------------------------------------------------\n";
+            Stats.add(teamNameCheck + "*" + topRow);
+            Stats.add(dashes);
             while (rs.next()){
                 //create a pitcher class for each row
                 p = new Pitcher(rs.getString(1),rs.getString(2),rs.getString(3),rs.getDouble(4),rs.getInt(5),rs.getInt(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getInt(12));
                 //use the created pitcher class to get a string and add it to the string variable that gets returned.
                 //if the currently looked at pitcher has a different team name, adds ---- to separate and adds the second team's name
                 if (!teamNameCheck.equalsIgnoreCase(p.getTeamName())){
-                    Stats += "------------------------------------------------------------------\n";
+                    Stats.add(dashes);
                     teamNameCheck = p.getTeamName();
-                    Stats += String.format(formatLengthName,teamNameCheck)  + topRow;
-                    Stats += "------------------------------------------------------------------\n";
+                    Stats.add(teamNameCheck+ "*"  + topRow);
+                    Stats.add(dashes);
                 }
                 //uses the getPitcherStats method to add a line of information gotten from the pitcher class object
-                Stats += getPitcherStats(p);
+                Stats.add(getPitcherStats(p));
             }            
             rs.close();
         } catch (SQLException e) {
