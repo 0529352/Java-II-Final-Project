@@ -10,11 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static javatestcode.JavaTestCode.DB_URL;
+import Classes.Pitcher;
 
 
 
-public class Input {
+public class FileInput {
     static String formatLengthName = "%-20.20s"; //controls length of last name and first name
     static String formatLengthNumber = "%-5.5s"; //controls length of the rest of the data
     private static Connection connection;
