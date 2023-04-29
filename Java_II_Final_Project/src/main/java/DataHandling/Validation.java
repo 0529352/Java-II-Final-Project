@@ -203,4 +203,27 @@ public class Validation {
         
         return msg;
     }
+    
+    /**
+     * Written By Jonathan Mestel on 4/26/2023
+     * This method checks for if a string is empty and if not, if the end of it contains .sqlite
+     * @return String containing an error message if there is one, otherwise returns an empty string
+     */
+    public static String getFileValidation(String Filename) {
+        String msg = "";
+        if (Filename.isEmpty()) {
+            msg += "Error: File name is empty!\n";
+            //check if the file name contains a .
+        } else if (Filename.contains(".")) {
+            //split the filename into an array
+            String[] temp = Filename.split("\\.");
+            //check the last item of the array to see if it contains sqlite for the file type
+            if (!(temp[temp.length - 1].equals("sqlite"))) {
+                msg += "Error: File name must contain a .sqlite extension";
+            }
+        } else {
+            msg += "Error: File name must contain a .sqlite extension";
+        }
+        return msg;
+    }
 }

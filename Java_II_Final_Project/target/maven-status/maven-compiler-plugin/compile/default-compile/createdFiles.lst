@@ -1,9 +1,7 @@
 DataHandling\Validation.class
-com\mycom\App.class
 FileIO\FileOutput.class
 module-info.class
 FileIO\FileInput.class
-DataHandling\StringUtility.class
 FileIO\MultiInput.class
 com\mycom\SystemInfo.class
 Classes\Pitcher.class
