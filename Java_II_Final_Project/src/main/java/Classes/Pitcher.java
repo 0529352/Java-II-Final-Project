@@ -4,7 +4,7 @@
  */
 
 /*
-Created By Joyce
+Created By Joice
 */
 package Classes;
 
@@ -23,8 +23,8 @@ public class Pitcher {
     private int earnedRuns;
     private int walks;
     private int atBats;
-    private int strikes;
-    private int hitByPitch;
+    //private int strikes;
+    //private int hitByPitch;
     private double era;
     
     public Pitcher(){
@@ -41,8 +41,8 @@ public class Pitcher {
         this.walks = 0;
         this.walks = 0;
         this.atBats = 0;
-        this.strikes = 0;
-        this.hitByPitch = 0;
+        //this.strikes = 0;
+        //this.hitByPitch = 0;
     }
     
     /*
@@ -59,7 +59,7 @@ public class Pitcher {
         this.runScored = runs;
         this.earnedRuns = earnedRuns;
         this.walks = walks;
-        this.strikes = strikeOuts;
+        this.strikeouts = strikeOuts;
         this.atBats = atBats;
         this.battersFaced = totalBattersFaced;
         this.nopitches = numberOfPitches;   
@@ -120,7 +120,7 @@ public class Pitcher {
     }
 
     
-    public void setInningsPitched(int inningsPitched) {
+    public void setInningsPitched(double inningsPitched) {
         this.inningsPitched = inningsPitched;
     }
 
@@ -172,7 +172,7 @@ public class Pitcher {
     public void setAtBats(int atBats) {
         this.atBats = atBats;
     }
-
+/*
     public int getStrikes() {
         return strikes;
     }
@@ -182,7 +182,7 @@ public class Pitcher {
         this.strikes = strikes;
     }
 
-    
+   
     public int getHitByPitch() {
         return hitByPitch;
     }
@@ -191,7 +191,7 @@ public class Pitcher {
     public void setHitByPitch(int hitByPitch) {
         this.hitByPitch = hitByPitch;
     }
-
+*/
     public double getERA(double inningsPitched, int earnedRuns){
         era = earnedRuns/inningsPitched;
         return era;

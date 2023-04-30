@@ -32,6 +32,9 @@ import java.time.format.FormatStyle;
 import java.util.List;
 import java.util.ArrayList;
 
+// --- Custom Imports --- //
+import Classes.Pitcher;
+
 public class App extends Application {
     
     // --- int --- //
@@ -91,7 +94,7 @@ public class App extends Application {
     
     // --- ListView and array object --- //
     private static ListView<String> players = new ListView<>();
-    //private static ArrayList<Pitcher> pitchers = new ArrayList<>();
+    private static ArrayList<Classes.Pitcher> pitchers = new ArrayList<>();
     
     // --- Buttons for list --- //
     private static Button addPlayer = new Button("Add");
@@ -155,11 +158,42 @@ public class App extends Application {
            if(msg.isEmpty()) {
                //get selected team
                RadioButton selected = (RadioButton) teams.getSelectedToggle();
-               players.getItems().add(LastNameTF.getText() + ", " + FirstNameTF.getText() + " - " + selected.getText());
-               /* ADD CODE HERE TO ADD PLAYER TO THE PITCHERS ARRAY */
+               players.getItems().add(LastNameTF.getText() + ", " + FirstNameTF.getText() + " - " + selected.getText() + " - IP: " + InningsTF.getText() + " H: " + HitsTF.getText() + " R: " + RunsTF.getText() + " ER: " + ERunsTF.getText() + " BB: " + WalksTF.getText() + " SO: " + SOTF.getText() + " AB: " + ABTF.getText() + " BF: " + BFTF.getText() + " NP: " + NPTF.getText());
                
-               //reset data entry menu
-               setPlayerMenu();
+               Pitcher temp = new Pitcher();
+               // do a try catch statment while parsing, in theory it should not due to validation class, however just in case
+               try {
+                    //Strings input into pitcher object
+                    temp.setFirstName(FirstNameTF.getText());
+                    temp.setLastName(LastNameTF.getText());
+                    temp.setTeamName(selected.getText());
+                    
+                    //Doubles input into pitcher object
+                    temp.setInningsPitched(Double.parseDouble(InningsTF.getText()));
+                    
+                    //Integers input into pitcher object
+                    temp.setHits((Integer.parseInt(HitsTF.getText())));
+                    temp.setRunScored(Integer.parseInt(RunsTF.getText()));
+                    temp.setEarnedRuns(Integer.parseInt(ERunsTF.getText()));
+                    temp.setWalks(Integer.parseInt(WalksTF.getText()));
+                    temp.setStrikeouts(Integer.parseInt(SOTF.getText()));
+                    temp.setAtBats(Integer.parseInt(ABTF.getText()));
+                    temp.setBattersFaced(Integer.parseInt(BFTF.getText()));
+                    temp.setNopitches(Integer.parseInt(NPTF.getText()));
+                    
+                    //add pitcher object to array
+                    pitchers.add(temp);
+
+                    //reset data entry menu
+                    setPlayerMenu();
+               
+               } catch (NumberFormatException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("An Exception has occured:");
+                    alert.setContentText(msg);
+                    alert.showAndWait();
+               }
            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -184,7 +218,7 @@ public class App extends Application {
                     players.getItems().remove(item);
                     
                     //use index of removed player to remove the pitcher from the parallel array
-                    //pitchers.remove(index);
+                    pitchers.remove(index);
                 }
             }
         });
@@ -258,7 +292,6 @@ public class App extends Application {
             } else {
                 if (selected.size() == 1) {
                     
-                    /* INSERT METHOD HERE TO GET TABLE FROM ONE FILE */
                     msg = FileIO.FileInput.PitcherStatistics(selected.get(0));
                     
                 } else {
@@ -305,8 +338,9 @@ public class App extends Application {
                 String nameOfFile = team1.getText() + " v " + team2.getText() + " - " + stringDate + ".sqlite";
 
                 /* ADD CODE HERE TO PASS THE NAME OF FILE AND THE PITCHER ARRAY TO THE FILE OUTPUT CLASS*/
+                
                 String msg = "";
-            
+                
                 //if msg is not empty, display an error else display a success message with the file name and bring the user back to the main menu
                 if (msg.isEmpty()) {
                     FileIO.SaveData.upLoadSave(nameOfFile);
@@ -614,7 +648,6 @@ public class App extends Application {
         SummaryMenu.setAlignment(Pos.TOP_LEFT);
         SummaryMenu.setPadding(inset);
         
-
         int line = 0;
         for(String arr : table) {
             if(arr.contains("*")) {
@@ -631,7 +664,6 @@ public class App extends Application {
                 line++;
             }
         }
-        
         
         HBox exitBox = new HBox(10);
         exitBox.setAlignment(Pos.BOTTOM_RIGHT);

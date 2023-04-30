@@ -27,15 +27,15 @@ public class FileInput {
         //String.format(formatLength,p.getLastName() + ", " + p.getFirstName())
         String stringLine
                 = p.getLastName() + ", " + p.getFirstName() + "*"
-                + p.getIp() + "*"
+                + p.getInningsPitched() + "*"
                 + p.getHits() + "*"
-                + p.getRuns() + "*"
+                + p.getRunScored() + "*"
                 + p.getEarnedRuns() + "*"
                 + p.getWalks() + "*"
-                + p.getStrikeOuts() + "*"
+                + p.getStrikeouts()+ "*"
                 + p.getAtBats() + "*"
-                + p.getTotalBattersFaced() + "*"
-                + p.getNumberOfPitches() + "*"
+                + p.getBattersFaced() + "*"
+                + p.getNopitches() + "*"
                 + "\n"
                 ;
 
@@ -131,15 +131,15 @@ public class FileInput {
             ps.setString(1,p.getLastName());
             ps.setString(2,p.getFirstName());
             ps.setString(3,p.getTeamName());
-            ps.setDouble(4,p.getPitched());
+            ps.setDouble(4,p.getNopitches());
             ps.setInt(5,p.getAtBats());
             ps.setInt(6,p.getHits());
-            ps.setInt(7,p.getRuns());
+            ps.setInt(7,p.getRunScored());
             ps.setInt(8,p.getEarnedRuns());
             ps.setInt(9,p.getWalks());
-            ps.setInt(10,p.getStrikeOuts());
-            ps.setInt(11,p.getTotalBattersFaced());
-            ps.setInt(12,p.getNumberOfPitches());
+            ps.setInt(10,p.getStrikeouts());
+            ps.setInt(11,p.getBattersFaced());
+            ps.setInt(12,p.getNopitches());
             ps.executeUpdate();
            
         } catch (SQLException e) {
