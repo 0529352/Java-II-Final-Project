@@ -1,314 +1,214 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
+
+/*
+Created By Joyce
+*/
 package Classes;
 
-/**
- *
- * @author Tron
- */
+
 public class Pitcher {
-    
+
     private String firstName;
     private String lastName;
     private String teamName;
-    private double pitched;
+    private int nopitches;
+    private int battersFaced;
+    private int strikeouts;
+    private double inningsPitched;
     private int hits;
-    private int runs;
+    private int runScored;
     private int earnedRuns;
     private int walks;
-    private int strikeOuts;
     private int atBats;
-    private int totalBattersFaced;
-    private int numberOfPitches;
+    private int strikes;
+    private int hitByPitch;
+    private double era;
     
+    public Pitcher(){
+        this.firstName = "";
+        this.lastName = "";
+        this.teamName = "";
+        this.nopitches = 0;
+        this.battersFaced = 0;
+        this.strikeouts = 0;
+        this.inningsPitched= 0.0;
+        this.hits = 0;
+        this.runScored = 0;
+        this.earnedRuns = 0;
+        this.walks = 0;
+        this.walks = 0;
+        this.atBats = 0;
+        this.strikes = 0;
+        this.hitByPitch = 0;
+    }
     
-    private int rbi;
-    private int putOut;
-    private int assists;
-    
-    private int ipPt1;
-    private int ipPt2;
-    private double ip;
-    
-    
+    /*
+    Pitcher constructor made by Colin
+    edited slightly by Jon
+    */
     public Pitcher(String fn, String ln, String tm, double ip, int hits, int runs, int earnedRuns, int walks, int strikeOuts, int atBats, int totalBattersFaced, int numberOfPitches){
         
         firstName = fn;
         lastName = ln;
         teamName = tm;
-        this.ip = ip;
+        this.inningsPitched = ip;
         this.hits = hits;
-        this.runs = runs;
+        this.runScored = runs;
         this.earnedRuns = earnedRuns;
         this.walks = walks;
-        this.strikeOuts = strikeOuts;
+        this.strikes = strikeOuts;
         this.atBats = atBats;
-        this.totalBattersFaced = totalBattersFaced;
-        this.numberOfPitches = numberOfPitches;
-        
-        
+        this.battersFaced = totalBattersFaced;
+        this.nopitches = numberOfPitches;   
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+   
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    
+    public String getLastName() {
+        return lastName;
+    }
+
+    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+  
+    
+    public int getNopitches() {
+        return nopitches;
+    }
+
+    
+    public void setNopitches(int nopitches) {
+        this.nopitches = nopitches;
+    }
+
+    
+    public int getBattersFaced() {
+        return battersFaced;
+    }
+
+    
+    public void setBattersFaced(int battersFaced) {
+        this.battersFaced = battersFaced;
+    }
+
+    
+    public int getStrikeouts() {
+        return strikeouts;
+    }
+
+    
+    public void setStrikeouts(int strikeouts) {
+        this.strikeouts = strikeouts;
+    }
+
+    
+    public double getInningsPitched() {
+        return inningsPitched;
+    }
+
+    
+    public void setInningsPitched(int inningsPitched) {
+        this.inningsPitched = inningsPitched;
+    }
+
+    
+    public int getHits() {
+        return hits;
+    }
+
+    
+    public void setHits(int hits) {
+        this.hits = hits;
+    }
+
+    
+    public int getRunScored() {
+        return runScored;
+    }
+
+    
+    public void setRunScored(int runScored) {
+        this.runScored = runScored;
+    }
+
+    public int getEarnedRuns() {
+        return earnedRuns;
+    }
+
+    
+    public void setEarnedRuns(int earnedRuns) {
+        this.earnedRuns = earnedRuns;
+    }
+
+    
+    public int getWalks() {
+        return walks;
+    }
+
+    
+    public void setWalks(int walks) {
+        this.walks = walks;
+    }
+
+    
+    public int getAtBats() {
+        return atBats;
+    }
+
+    
+    public void setAtBats(int atBats) {
+        this.atBats = atBats;
+    }
+
+    public int getStrikes() {
+        return strikes;
+    }
+
+   
+    public void setStrikes(int strikes) {
+        this.strikes = strikes;
+    }
+
+    
+    public int getHitByPitch() {
+        return hitByPitch;
+    }
+
+   
+    public void setHitByPitch(int hitByPitch) {
+        this.hitByPitch = hitByPitch;
+    }
+
+    public double getERA(double inningsPitched, int earnedRuns){
+        era = earnedRuns/inningsPitched;
+        return era;
+    }
+    
+    public String getTeamName() {
+        return teamName;
+    }
+    
+    public void setTeamName(String tn) {
+        teamName = tn;
     }
 
     /**
      * @return the firstName
      */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * @param firstName the firstName to set
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * @return the teamName
-     */
-    public String getTeamName() {
-        return teamName;
-    }
-
-    /**
-     * @param teamName the teamName to set
-     */
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
-    }
-
-    /**
-     * @return the pitched
-     */
-    public double getPitched() {
-        return pitched;
-    }
-
-    /**
-     * @param pitched the pitched to set
-     */
-    public void setPitched(double pitched) {
-        this.pitched = pitched;
-    }
-
-    /**
-     * @return the hits
-     */
-    public int getHits() {
-        return hits;
-    }
-
-    /**
-     * @param hits the hits to set
-     */
-    public void setHits(int hits) {
-        this.hits = hits;
-    }
-
-    /**
-     * @return the runs
-     */
-    public int getRuns() {
-        return runs;
-    }
-
-    /**
-     * @param runs the runs to set
-     */
-    public void setRuns(int runs) {
-        this.runs = runs;
-    }
-
-    /**
-     * @return the earnedRuns
-     */
-    public int getEarnedRuns() {
-        return earnedRuns;
-    }
-
-    /**
-     * @param earnedRuns the earnedRuns to set
-     */
-    public void setEarnedRuns(int earnedRuns) {
-        this.earnedRuns = earnedRuns;
-    }
-
-    /**
-     * @return the walks
-     */
-    public int getWalks() {
-        return walks;
-    }
-
-    /**
-     * @param walks the walks to set
-     */
-    public void setWalks(int walks) {
-        this.walks = walks;
-    }
-
-    /**
-     * @return the strikeOuts
-     */
-    public int getStrikeOuts() {
-        return strikeOuts;
-    }
-
-    /**
-     * @param strikeOuts the strikeOuts to set
-     */
-    public void setStrikeOuts(int strikeOuts) {
-        this.strikeOuts = strikeOuts;
-    }
-
-    /**
-     * @return the atBats
-     */
-    public int getAtBats() {
-        return atBats;
-    }
-
-    /**
-     * @param atBats the atBats to set
-     */
-    public void setAtBats(int atBats) {
-        this.atBats = atBats;
-    }
-
-    /**
-     * @return the totalBattersFaced
-     */
-    public int getTotalBattersFaced() {
-        return totalBattersFaced;
-    }
-
-    /**
-     * @param totalBattersFaced the totalBattersFaced to set
-     */
-    public void setTotalBattersFaced(int totalBattersFaced) {
-        this.totalBattersFaced = totalBattersFaced;
-    }
-
-    /**
-     * @return the numberOfPitches
-     */
-    public int getNumberOfPitches() {
-        return numberOfPitches;
-    }
-
-    /**
-     * @param numberOfPitches the numberOfPitches to set
-     */
-    public void setNumberOfPitches(int numberOfPitches) {
-        this.numberOfPitches = numberOfPitches;
-    }
-
-    /**
-     * @return the ipPt1
-     */
-    public int getIpPt1() {
-        return ipPt1;
-    }
-
-    /**
-     * @param ipPt1 the ipPt1 to set
-     */
-    public void setIpPt1(int ipPt1) {
-        this.ipPt1 = ipPt1;
-    }
-
-    /**
-     * @return the ipPt2
-     */
-    public int getIpPt2() {
-        return ipPt2;
-    }
-
-    /**
-     * @param ipPt2 the ipPt2 to set
-     */
-    public void setIpPt2(int ipPt2) {
-        this.ipPt2 = ipPt2;
-    }
-
-    /**
-     * @return the ip
-     */
-    public double getIp() {
-        return ip;
-    }
-
-    /**
-     * @param ip the ip to set
-     */
-    public void setIp(int ip) {
-        this.ip = ip;
-    }
-
-    /**
-     * @return the rbi
-     */
-    public int getRbi() {
-        return rbi;
-    }
-
-    /**
-     * @param rbi the rbi to set
-     */
-    public void setRbi(int rbi) {
-        this.rbi = rbi;
-    }
-
-    /**
-     * @return the putOut
-     */
-    public int getPutOut() {
-        return putOut;
-    }
-
-    /**
-     * @param putOut the putOut to set
-     */
-    public void setPutOut(int putOut) {
-        this.putOut = putOut;
-    }
-
-    /**
-     * @return the assists
-     */
-    public int getAssists() {
-        return assists;
-    }
-
-    /**
-     * @param assists the assists to set
-     */
-    public void setAssists(int assists) {
-        this.assists = assists;
-    }
-    
-    
-    
-    
-    
-    
-    
+   
     
     
     
