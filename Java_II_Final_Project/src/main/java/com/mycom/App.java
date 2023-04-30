@@ -252,19 +252,19 @@ public class App extends Application {
         //load files button
         LoadFile.setOnAction(event -> {
             List<String> selected = loadList.getSelectionModel().getSelectedItems();
-            String msg;
+            ArrayList<String> msg = new ArrayList<>();
             if (selected.isEmpty()) {
                 
             } else {
                 if (selected.size() == 1) {
                     
                     /* INSERT METHOD HERE TO GET TABLE FROM ONE FILE */
-                    msg = "Table 1";
+                    msg = FileIO.FileInput.PitcherStatistics(selected.get(0));
                     
                 } else {
                     
                     /* INSERT METHOD HERE TO GET TABLE FROM MULTIPLE FILES */
-                    msg = "Table 2";
+                    
                 }
                 scene = viewRecord(msg);
                 primaryStage.setScene(scene);
@@ -608,18 +608,30 @@ public class App extends Application {
         return new Scene (SummaryMenu, 450, 300);
     }
     
-    public static Scene viewRecord(String table) {
+    public static Scene viewRecord(ArrayList<String> table) {
         menuNum = 5;
         GridPane SummaryMenu = new GridPane();
         SummaryMenu.setAlignment(Pos.TOP_LEFT);
         SummaryMenu.setPadding(inset);
         
-        Label tableLabel = new Label(table);
+
+        int line = 0;
+        for(String arr : table) {
+            if(arr.contains("*")) {
+                String[] strings = arr.split("\\*");
+                for(int i = 0; strings.length > i; i++) {
+                    Insets in = new Insets(0, 12, 0, 0);
+                    Label lab = new Label(strings[i]);
+                    lab.setPadding(in);
+                    SummaryMenu.add(lab, i, line);
+                }
+                line++;
+            } else {
+                SummaryMenu.add(new Label(arr), 0, line, 10, 1);
+                line++;
+            }
+        }
         
-        tableLabel.setPrefHeight(24 * 16);
-        tableLabel.setPrefWidth(800);
-        
-        SummaryMenu.add(tableLabel, 0, 0);
         
         HBox exitBox = new HBox(10);
         exitBox.setAlignment(Pos.BOTTOM_RIGHT);
@@ -628,7 +640,7 @@ public class App extends Application {
         CancelButton.setText("Main Menu");
         exitBox.getChildren().add(HelpButton);
         exitBox.getChildren().add(ExitButton);
-        SummaryMenu.add(exitBox, 0, 1);
+        SummaryMenu.add(exitBox, 0, line, 10, 1);
         
         return new Scene(SummaryMenu, 850, 500);
     }
