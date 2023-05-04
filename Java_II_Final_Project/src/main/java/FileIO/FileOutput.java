@@ -37,7 +37,7 @@ public class FileOutput {
                     + "np   INTEGER     "
                     + ")";
             Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(pitcherDatabase);
+            statement.executeUpdate(pitcherDatabase);
             for (int i = 0; i < names.size(); i++) {
                 Pitcher pitcher = names.get(i);
                 String insert = "INSERT INTO StatsTable VALUES ("
@@ -55,7 +55,7 @@ public class FileOutput {
                 ps.setString(10, pitcher.getStrikeouts()+"");
                 ps.setString(11, pitcher.getBattersFaced()+"");
                 ps.setString(12, pitcher.getNopitches()+"");
-                ResultSet finishedTable = ps.executeQuery();
+                ps.executeUpdate();
             }
             return "";
         } catch (SQLException E) {
@@ -63,5 +63,8 @@ public class FileOutput {
         }               
     }
 }
+
+
+
 
 
