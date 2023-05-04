@@ -286,6 +286,10 @@ public class App extends Application {
         //load files button
         LoadFile.setOnAction(event -> {
             List<String> selected = loadList.getSelectionModel().getSelectedItems();
+            ArrayList<String> arr = new ArrayList<>();
+            for (String se : selected) {
+                arr.add(se);
+            }
             ArrayList<String> msg = new ArrayList<>();
             if (selected.isEmpty()) {
                 
@@ -296,7 +300,7 @@ public class App extends Application {
                     
                 } else {
                     
-                    /* INSERT METHOD HERE TO GET TABLE FROM MULTIPLE FILES */
+                    msg = FileIO.MultiInput.getSummary(arr);
                     
                 }
                 scene = viewRecord(msg);
@@ -339,7 +343,7 @@ public class App extends Application {
 
                 /* ADD CODE HERE TO PASS THE NAME OF FILE AND THE PITCHER ARRAY TO THE FILE OUTPUT CLASS*/
                 
-                String msg = "";
+                String msg = FileIO.FileOutput.Output(nameOfFile, pitchers);
                 
                 //if msg is not empty, display an error else display a success message with the file name and bring the user back to the main menu
                 if (msg.isEmpty()) {
@@ -351,7 +355,7 @@ public class App extends Application {
                     alert.setContentText(nameOfFile);
                     alert.showAndWait();
 
-                    scene = getTeamMenu();
+                    scene = getMainMenu();
                     primaryStage.setScene(scene);
                     //set text for next button
                     NextButton.setText("Next");
@@ -516,7 +520,7 @@ public class App extends Application {
         addPlayerMenu.add(addBox, 0, 7, 4, 1);
         
         //clear the listview and arraylist
-        //pitchers.clear();
+        pitchers.clear();
         players.getItems().clear();
         
         players.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -594,7 +598,7 @@ public class App extends Application {
         exitBox.getChildren().add(ExitButton);
         recordMenu.add(exitBox, 0, 3);
         
-        return new Scene(recordMenu, 450, 200);
+        return new Scene(recordMenu, 450, 350);
     }
     
     public static Scene setSaveRecordMenu() {
@@ -648,19 +652,19 @@ public class App extends Application {
         SummaryMenu.setAlignment(Pos.TOP_LEFT);
         SummaryMenu.setPadding(inset);
         
-        int line = 0;
+        int line = 1;
         for(String arr : table) {
             if(arr.contains("*")) {
                 String[] strings = arr.split("\\*");
                 for(int i = 0; strings.length > i; i++) {
-                    Insets in = new Insets(0, 12, 0, 0);
+                    Insets in = new Insets(0, 15, 0, 0);
                     Label lab = new Label(strings[i]);
                     lab.setPadding(in);
                     SummaryMenu.add(lab, i, line);
                 }
                 line++;
             } else {
-                SummaryMenu.add(new Label(arr), 0, line, 10, 1);
+                SummaryMenu.add(new Label(arr), 0, line, 11, 1);
                 line++;
             }
         }
@@ -672,8 +676,8 @@ public class App extends Application {
         CancelButton.setText("Main Menu");
         exitBox.getChildren().add(HelpButton);
         exitBox.getChildren().add(ExitButton);
-        SummaryMenu.add(exitBox, 0, line, 10, 1);
+        SummaryMenu.add(exitBox, 0, 0, 11, 1);
         
-        return new Scene(SummaryMenu, 850, 500);
+        return new Scene(SummaryMenu, 550, 700);
     }
 }

@@ -49,7 +49,7 @@ public class Pitcher {
     Pitcher constructor made by Colin
     edited slightly by Jon
     */
-    public Pitcher(String fn, String ln, String tm, double ip, int hits, int runs, int earnedRuns, int walks, int strikeOuts, int atBats, int totalBattersFaced, int numberOfPitches){
+    public Pitcher(String ln, String fn, String tm, double ip, int hits, int runs, int earnedRuns, int walks, int strikeOuts, int atBats, int totalBattersFaced, int numberOfPitches){
         
         firstName = fn;
         lastName = ln;
@@ -192,8 +192,12 @@ public class Pitcher {
         this.hitByPitch = hitByPitch;
     }
 */
-    public double getERA(double inningsPitched, int earnedRuns){
-        era = earnedRuns/inningsPitched;
+    public double getERA(){
+        if (inningsPitched != 0) {
+            era = 9 * earnedRuns/inningsPitched;
+        } else {
+            era = 0;
+        }
         return era;
     }
     
