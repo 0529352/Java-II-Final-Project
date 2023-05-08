@@ -121,6 +121,11 @@ public class App extends Application {
     // --- ListView object --- //
     private static ListView<String> saveList = new ListView<>();
     
+    // --- Button & TextField for making report --- //
+    private static Button CreateReport = new Button("Create Report");
+    private static TextField ReportName;
+    private static ArrayList<String> ReportString;
+    
     /**
      * Written By Jonathan Mestel On 4/25/2023 - 4/29/2023
      * @param primaryStage 
@@ -366,6 +371,20 @@ public class App extends Application {
                     alert.setContentText(msg);
                     alert.showAndWait();
                 }
+            }
+        });
+        
+        //create record button is pressed
+        CreateReport.setOnAction(event -> {
+            if (ReportName.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Error Creating File: ");
+                alert.setContentText("Filename Cannot be empty ");
+                alert.showAndWait();
+            } else {
+                //so long as the name is not empty, pass the filename and Report string to the filename
+                String Filename = ReportName.getText() + ".txt";
+                FileIO.ReportOutput.MakeReport(ReportString, Filename);
             }
         });
         
@@ -652,7 +671,10 @@ public class App extends Application {
         SummaryMenu.setAlignment(Pos.TOP_LEFT);
         SummaryMenu.setPadding(inset);
         
-        int line = 1;
+        ReportString = table;
+        
+        //line defines the row of the grid
+        int line = 2;
         for(String arr : table) {
             if(arr.contains("*")) {
                 String[] strings = arr.split("\\*");
@@ -676,7 +698,16 @@ public class App extends Application {
         CancelButton.setText("Main Menu");
         exitBox.getChildren().add(HelpButton);
         exitBox.getChildren().add(ExitButton);
-        SummaryMenu.add(exitBox, 0, 0, 11, 1);
+        SummaryMenu.add(exitBox, 0, 1, 11, 1);
+        
+        HBox ReportBox = new HBox(10);
+        ReportBox.setAlignment(Pos.BOTTOM_RIGHT);
+        
+        ReportBox.getChildren().add(new Label("Create Report: "));
+        ReportBox.getChildren().add(ReportName = new TextField());
+        ReportBox.getChildren().add(CreateReport);
+        
+        SummaryMenu.add(ReportBox, 0, 0, 11, 1);
         
         return new Scene(SummaryMenu, 550, 700);
     }

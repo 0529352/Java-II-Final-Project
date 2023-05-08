@@ -94,7 +94,7 @@ public class MultiInput {
         }
         //create the main Arraylist object to return
         ArrayList<String> Output = new ArrayList<>();
-        String Space = "-----------------------------------------------------------------------";
+        String Space = "------------------------------------------------------------------------------------";
         //create table
         for (String Name : TeamNames) {
             Output.add(Name + " - " + Teams.get(Name) + " games" +"*IP*AB*H*R*ER*BB*SO*BF*NP");
